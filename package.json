@@ -1,0 +1,11 @@
+{
+  "name": "medium-toptrends",
+  "version": "1.0.0",
+  "description": "Repositório criado para compartilhar os arquivos utilizados para o meetup do #PrytulaTeam.",
+  "dependencies": {
+    "firebase-admin": "^5.6.0",
+    "firebase-functions": "^0.8.0"
+  },
+  "author": "Leonardo Alves <leonardo.alves@cwi.com.br>",
+  "license": "ISC"
+}
