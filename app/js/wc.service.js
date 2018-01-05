@@ -3,26 +3,27 @@ app.factory('wcService', wcService);
 function wcService(dbService) {
 
     const dimensoes = () => ({
-        width:  window.innerWidth  - (window.innerWidth  * .4),
+        width:  window.innerWidth  - (window.innerWidth  * .3),
         height: window.innerHeight - (window.innerHeight * .4)
     });
 
-    function getWc(snapshot, callback) {
+    function getWc(snapshot) {
         const data = snapshot.val();
         data.forEach(d => d.size *= 4);
 
-        callback({
+        return {
             'words': data,
             'height': dimensoes().height,
             'width': dimensoes().width,
             'useTransition': true,
             'rotate': 45,
-        })
+        };
     }
 
     return {    
-        show: (document, callback) => 
-            dbService.getDataFrom(document, snapshot => 
-                                    getWc(snapshot, callback)),
+        show: async (document) => {
+            let dados = await dbService.getDataFrom(document);
+            return getWc(dados);
+        }
     }
 }   

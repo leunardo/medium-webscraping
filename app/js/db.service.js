@@ -5,10 +5,9 @@ function dbService(firebaseInit) {
     const db = firebase.database();
 
     return {
-        getDataFrom: (document, callback) => {
-            db.ref(document)
-                .once('value')
-                .then(snapshot => callback(snapshot));
+        getDataFrom: async (document) => {
+            let data = await db.ref(document).once('value');
+            return data;                
         }
     }
 }
