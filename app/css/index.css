@@ -1,1 +1,8 @@
+html { overflow: auto; }
 .overx-auto { overflow-x: auto; }
+
+#wordcloud-wrapper { 
+    display: flex; 
+    justify-content: center; 
+    flex-direction: row; 
+}
