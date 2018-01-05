@@ -5,13 +5,27 @@
  */
 function trending(countPalavras, porTopico=false) {
     const palavrasValidas = {};
-    const limite = porTopico ? 10 : 20; // caso a palavra seja muito frequente, quase certeza de ela ser um outlier
     
     for (let i in countPalavras) {
-        if (countPalavras[i] === 1 || countPalavras[i] >= limite) continue;
+        if (palavraDeveSerIgnorada(i, countPalavras[i], porTopico)) continue;
         palavrasValidas[i] = countPalavras[i];
     }
-    return Object.keys(palavrasValidas).map((key) => [key, palavrasValidas[key]]);
+    return Object.keys(palavrasValidas).map((key) => { return { text: key, size: palavrasValidas[key]} });
+}
+
+/**
+ * Decide se a palavra deve ser ignorada ou nao, na filtragem da funcao trending.
+ * @param {String} palavra 
+ * @param {Number} numeroOcorrencias
+ * @param {String} porTopico 
+ * @returns {Boolean} 
+ */
+function palavraDeveSerIgnorada(palavra, numeroOcorrencias, porTopico) {
+    const palavrasIgnoradas = 'this are at by not it its about should make all as if or';
+    const limite = porTopico ? 10 : 20;          // caso a palavra seja muito frequente, quase certeza de ela ser um outlier
+    return (numeroOcorrencias === 1 ||           // palavra é só uma letra
+            numeroOcorrencias >= limite ||       // palavra excede o limite de frequencia
+            ~palavrasIgnoradas.indexOf(palavra)) // palavra é uma que deve ser ignorada
 }
 
 /**
