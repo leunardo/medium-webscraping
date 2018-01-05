@@ -1,18 +1,17 @@
 /**
  * Seleciona as palavras com mais frequencia.
  * @param {Object} countPalavras um objeto <palavra:quantidade>
- * @param {boolean} porTopico decide se devera manter as palavras separadas por topico
- * ou agrupa-las.
+ * @param {boolean} porTopico define o valor do limite, geral tem o limite maior.
  */
 function trending(countPalavras, porTopico=false) {
-    const trending = {};
+    const palavrasValidas = {};
     const limite = porTopico ? 10 : 20; // caso a palavra seja muito frequente, quase certeza de ela ser um outlier
     
     for (let i in countPalavras) {
         if (countPalavras[i] === 1 || countPalavras[i] >= limite) continue;
-        trending[i] = countPalavras[i];
+        palavrasValidas[i] = countPalavras[i];
     }
-    return trending;
+    return Object.keys(palavrasValidas).map((key) => [key, palavrasValidas[key]]);
 }
 
 /**
