@@ -7,9 +7,17 @@ function wcService(dbService) {
         height: window.innerHeight - (window.innerHeight * .4)
     });
 
-    function getWc(snapshot) {
+    function productFactor(isGeneral) {
+        const dim = dimensoes();
+        const bias = isGeneral ? .7 : 1.1;
+        const higherViewPort = Math.max(dim.height, dim.width);
+        return .015 * higherViewPort * bias;
+    }
+
+    function getWc(snapshot, isGeneral) {
         const data = snapshot.val();
-        data.forEach(d => d.size *= 4);
+
+        data.forEach(d => d.size *= productFactor(isGeneral));
 
         return {
             'words': data,
@@ -21,9 +29,9 @@ function wcService(dbService) {
     }
 
     return {    
-        show: async (document) => {
+        show: async (document, isGeneral) => {
             let dados = await dbService.getDataFrom(document);
-            return getWc(dados);
+            return getWc(dados, isGeneral);
         }
     }
 }   
