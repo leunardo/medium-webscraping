@@ -5,5 +5,9 @@ app.config(function ($routeProvider) {
         .when('/', {
             controller: 'homeController',
             templateUrl: 'templates/home.html'
-        }); 
+        })
+        .when('/:topic', {
+            controller: 'topicController',
+            templateUrl: 'templates/topic.html'
+        })
 });
