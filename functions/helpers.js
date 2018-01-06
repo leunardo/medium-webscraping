@@ -21,7 +21,7 @@ function trending(countPalavras, porTopico=false) {
  * @returns {Boolean} 
  */
 function palavraDeveSerIgnorada(palavra, numeroOcorrencias, porTopico) {
-    const palavrasIgnoradas = 'this are at by not it its about should make all as if or im';
+    const palavrasIgnoradas = 'this are at by not it its about should make all as if or im why us so for be vc to on in you your and ive';
     const limite = porTopico ? 10 : 20;          // caso a palavra seja muito frequente, quase certeza de ela ser um outlier
     return (numeroOcorrencias === 1 ||           // palavra é só uma letra
             numeroOcorrencias >= limite ||       // palavra excede o limite de frequencia
